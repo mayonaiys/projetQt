@@ -20,7 +20,7 @@ void Player::jumpUp(){// attention test pour le disconnect
         if (this->getY() <= this->currentHeight - this->jumpHeight) {
             this->isjump = false;
             this->onGround = false;
-//            disconnect(timerPLayer);
+            disconnect(timerPLayer,SIGNAL(timeout()), this, SLOT(jumpUp()));
             connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpDown()));
         } else {
             this->move(0, -5);
@@ -30,8 +30,8 @@ void Player::jumpUp(){// attention test pour le disconnect
 }
 void Player::jumpDown(){
     if(!this->onGround&& !this->isjump){
-        cout << "jump down\n";
-        cout << "j = " << this->isjump << " og =" << this->onGround << endl;
+//        cout << "jump down\n";
+//        cout << "j = " << this->isjump << " og =" << this->onGround << endl;
         if (!this->getOnGround() && !this->isjump) {
             this->move(0, 5);
             this->draw();
@@ -42,11 +42,10 @@ void Player::jumpDown(){
             if (typeid(*(colliding_item[i])) == typeid(Sol)) {
                this->isjump = false;
                this->onGround = true;
-                cout << "au sol \n";
-                cout << "j = " << this->isjump << " og =" << this->onGround << endl;
+//                cout << "au sol \n";
+//                cout << "j = " << this->isjump << " og =" << this->onGround << endl;
                 this->currentHeight = this->getY();
-//                disconnect(timerPLayer);
-
+                disconnect(timerPLayer,SIGNAL(timeout()), this, SLOT(jumpDown()));
             }
         }
     }
@@ -78,7 +77,6 @@ void Player :: keyPressEvent(QPixmap background, QKeyEvent* event) {
             this->isjump = true;
             cout<<"monte\n";
             cout<<"j = "<<this->isjump<<" og ="<<this->onGround<<endl;
-//            disconnect(timerPLayer);
             connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpUp()));
 
         }
