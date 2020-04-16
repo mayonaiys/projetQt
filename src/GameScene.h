@@ -11,7 +11,10 @@
 #include <QPainter>
 #include <QRectF>
 #include <QKeyEvent>
+
 #include "Player.h"
+#include "Sol.h"
+
 using namespace std;
 class GameScene : public QGraphicsScene {
 

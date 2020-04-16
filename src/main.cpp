@@ -1,4 +1,4 @@
-#include "MainWindow.h"
+#include "GameWindow.h"
 
 #include <QApplication>
 #include <QTime>
@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
     QTime time = QTime::currentTime();
     qsrand((uint)time.msec());
 
-    MainWindow mainWindow;
+    GameWindow mainWindow;
     mainWindow.show();
 
     return app.exec();

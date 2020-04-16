@@ -1,19 +1,21 @@
-#include "MainWindow.h"
+#include "GameWindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
+GameWindow::GameWindow(QWidget *parent)
         : QMainWindow(parent)
 {
     int dx=dw.width();
     int dy=dw.height();
+
     this->gameScene = new GameScene();
 
     mainView = new QGraphicsView();
     mainView->setScene(gameScene);
-    mainView->scale(0.8, 0.8);
+    mainView->scale(0.5, 0.5);
 
     this->setCentralWidget(mainView);
+
     this->setWindowTitle("Main view");
-    this->resize(dx, dy);
+//    this->resize(dx, dy);
 
 }
 

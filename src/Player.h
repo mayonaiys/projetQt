@@ -4,27 +4,76 @@
 
 #ifndef PROJETQT_PLAYER_H
 #define PROJETQT_PLAYER_H
+
 #include <iostream>
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
+#include <QTimer>
+#include <QKeyEvent>
+#include "Sol.h"
 
 using namespace std;
-class Player : public QGraphicsPixmapItem{
+
+class Player :  public QObject, public QGraphicsPixmapItem{
+    Q_OBJECT;
+    //ATTRIBUTS
 private:
     QString description;
-    float speed;
+    QTimer* timerPLayer;
+    //nbr de vie ?
+    int x;
+    int y;
+    int currentHeight;
+    int jumpHeight;
+    bool isjump;
+    bool onGround;
+
+    //METHODES
 public:
-    Player(QString description, QString imageFileName, float speed = 0) : QGraphicsPixmapItem(QPixmap(imageFileName)), description(description){
-        this->speed = 0;
+    //CONSTRUCTEUR ET DESTRUCTEUR
+    Player(QString description, QString imageFileName, int x , int y ) : QGraphicsPixmapItem(QPixmap(imageFileName)), description(description){
+        this->setPos(x,y);
+        this->x = pos().x();
+        this->y = pos().y();
+
+        this->timerPLayer = new QTimer();
+
+        this->onGround = true;
+        this->isjump = false;
+
+        this->jumpHeight = 200;//un saut de 300 pxl
+        this->currentHeight = this->x - 144 ;//car la hauteur du perso
     }
+    //FONCTION PLAYER
+    bool inscreen(int x, int y, QPixmap background);
     void move(int x, int y);
+    void draw();
     const QString &getDescription() const { return this->description; }
     void setDescription(const QString &description) { this->description = description; }
-    void setSpeed(int speed) { this->speed = speed; }
-    int getSpeed() const { return speed; }
-    int getX(){return this->pos().x();}
-    int getY(){return this->pos().y();}
+
+    // SETTERS AND GETTERS
+    void setX(int x){this->x = x;};
+    void setY(int y){this->y = y;};
+    int getX(){return this->x;};
+    int getY(){return this->y;};
+
+    void setIsJump(bool isjump){ this->isjump = isjump;};
+    void setOnGround(bool onGround){ this->onGround = onGround;};
+    bool getIsJump(){ return this->isjump;};
+    bool getOnGround(){return this->onGround;};
+
+    void setCurrentHeight(int y){ this->currentHeight = y;};
+    int getCurrentHeight(){return this->currentHeight;};
+
+
+    // SLOTS
+public slots :
+    void keyPressEvent(QPixmap background, QKeyEvent* event);
+    void jumpUp();
+    void jumpDown();
+
+
 };
 
 

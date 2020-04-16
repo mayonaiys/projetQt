@@ -2,8 +2,8 @@
 // Created by Théo on 11/04/2020.
 //
 
-#ifndef PROJETQT_MAINWINDOW_H
-#define PROJETQT_MAINWINDOW_H
+#ifndef PROJETQT_GAMEWINDOW_H
+#define PROJETQT_GAMEWINDOW_H
 
 
 #include "GameScene.h"
@@ -13,22 +13,25 @@
 #include <QDesktopWidget>
 #include <QVector>
 #include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QPushButton>
 
 
-class MainWindow : public QMainWindow
+class GameWindow : public QMainWindow
 {
 Q_OBJECT
 
 private :
     GameScene* gameScene;
     QGraphicsView* mainView;
+    QVBoxLayout* vertical;
     QDesktopWidget dw;
 
 public:
-    MainWindow(QWidget* parent = nullptr);
-    virtual ~MainWindow() {};
+    GameWindow(QWidget* parent = nullptr);
+    virtual ~GameWindow() {};
 
 };
 
 
-#endif //PROJETQT_MAINWINDOW_H
+#endif //PROJETQT_GAMEWINDOW_H
