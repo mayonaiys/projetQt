@@ -1,9 +1,9 @@
 //
-// Created by Théo on 11/04/2020.
+// Created by Théo on 17/04/2020.
 //
 
-#ifndef PROJETQT_GAMESCENE_H
-#define PROJETQT_GAMESCENE_H
+#ifndef PROJETQT_LEVEL1_H
+#define PROJETQT_LEVEL1_H
 
 #include <iostream>
 #include <QGraphicsScene>
@@ -15,10 +15,11 @@
 
 #include "Player.h"
 #include "Wall.h"
+#include "Ground.h"
+#include "Flammes.h"
+#include "FinalFlag.h"
 
-using namespace std;
-class GameScene : public QGraphicsScene {
-
+class Level1 : public QGraphicsScene {
 Q_OBJECT
 
 private :
@@ -26,7 +27,7 @@ private :
     Player* player;
 
 public:
-    GameScene();
+    Level1();
     void drawBackground(QPainter* painter, const QRectF& rect);
 
 public slots :
@@ -34,4 +35,4 @@ public slots :
 };
 
 
-#endif //PROJETQT_GAMESCENE_H
+#endif //PROJETQT_LEVEL1_H

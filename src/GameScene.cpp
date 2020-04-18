@@ -9,11 +9,13 @@ GameScene::GameScene() {
     this->addItem(player);//144 sur 100 player.png
 
     //ajout des obsctacles
-    Sol* ground = new Sol("ground", "../img/Ground.png", 0, 0);
-    this->addItem(ground);
+//    Wall* ground = new Wall("ground", "../img/Ground.png", 0, 0);
+//    Wall* obstacle = new Wall("obstacle1", "../img/Wall.png",0,0);
+//    this->addItem(obstacle);
+//    this->addItem(ground);
 
-    this->timer = new QTimer(this);
-    this->timer->start(30);
+//    this->timer = new QTimer(this);
+//    this->timer->start(30);
 
 //    connect(timer, SIGNAL(timeout()), this, SLOT(keyPressEvent()));
 //    this->player->keyPressEvent(background, event);

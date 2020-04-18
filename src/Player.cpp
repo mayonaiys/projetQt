@@ -15,8 +15,8 @@ void Player::draw() {
 
 void Player::jumpUp(){// attention test pour le disconnect
     if(this->getIsJump() && !this->getOnGround()){
-        cout << "jump up\n";
-        cout << "j = " << this->isjump << " og =" << this->onGround << endl;
+//        cout << "jump up\n";
+//        cout << "j = " << this->isjump << " og =" << this->onGround << endl;
         if (this->getY() <= this->currentHeight - this->jumpHeight) {
             this->isjump = false;
             this->onGround = false;
@@ -35,17 +35,24 @@ void Player::jumpDown(){
         if (!this->getOnGround() && !this->isjump) {
             this->move(0, 5);
             this->draw();
-        }
 
+        }
         QList<QGraphicsItem *> colliding_item = collidingItems();
         for (int i = 0; i < colliding_item.length(); i++) {
-            if (typeid(*(colliding_item[i])) == typeid(Sol)) {
+            if (typeid(*(colliding_item[i])) == typeid(Ground)) {
                this->isjump = false;
                this->onGround = true;
 //                cout << "au sol \n";
 //                cout << "j = " << this->isjump << " og =" << this->onGround << endl;
                 this->currentHeight = this->getY();
-                disconnect(timerPLayer,SIGNAL(timeout()), this, SLOT(jumpDown()));
+                disconnect(timerPLayer,SIGNAL(timeout()), this, SLOT(jumpDown ()));
+            }
+            if(typeid(*(colliding_item[i])) == typeid(Flammes)){
+                cout<<"tu est mort\n";
+                this->restart();
+            }
+            if(typeid(*(colliding_item[i])) == typeid(FinalFlag)){
+                cout<<"tu as reussi\n";
             }
         }
     }
@@ -57,35 +64,104 @@ bool Player::inscreen(int x, int y, QPixmap background){
 }
 void Player :: keyPressEvent(QPixmap background, QKeyEvent* event) {
     if(event->key() == Qt::Key_Left){
-        if(inscreen(-10,0,background)) {
+        bool verifWall = false;
+        bool verifOnGround = false;
+        QList<QGraphicsItem *> colliding_item = collidingItems();
+        for (int i = 0; i < colliding_item.length(); i++) {
+            if (typeid(*(colliding_item[i])) == typeid(Wall)) {
+                verifWall = true;
+            }
+        }
+        if(inscreen(-10,0,background) && !verifWall){
             this->move(-10, 0);
             this->draw();
+            QList<QGraphicsItem *> colliding_item2 = collidingItems();
+            for (int i = 0; i < colliding_item2.length(); i++) {
+                if (typeid(*(colliding_item2[i])) == typeid(Wall)) {
+//                    cout<<"wall\n";
+                    this->move(10, 0);
+                    this->draw();
+                }
+            }
+        }
+        QList<QGraphicsItem *> colliding_item2 = collidingItems();
+        for (int i = 0; i < colliding_item2.length(); i++) {
+            if (typeid(*(colliding_item2[i])) == typeid(Ground)) {
+                verifOnGround = true;
+            }
+        }
+        if(!this->getIsJump() && !verifOnGround){
+            this->setOnGround(false);
+            connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpDown()));
         }
     }
     if(event->key() == Qt::Key_Right) {
-        if(inscreen(10,0,background)) {
+        bool verifWall = false;
+        bool verifOnGround = false;
+        QList<QGraphicsItem *> colliding_item1 = collidingItems();
+        for (int i = 0; i < colliding_item1.length(); i++) {
+            if (typeid(*(colliding_item1[i])) == typeid(Wall)) {
+                verifWall = true;
+            }
+        }
+        if(inscreen(10,0,background) && !verifWall){
             this->move(10, 0);
             this->draw();
+            bool verifGround = false;
+            QList<QGraphicsItem *> colliding_item2 = collidingItems();
+            for (int i = 0; i < colliding_item2.length(); i++) {
+                if (typeid(*(colliding_item2[i])) == typeid(Wall)) {
+//                    cout<<"wall\n";
+                    this->move(-10, 0);
+                    this->draw();
+                }
+            }
+        }
+        QList<QGraphicsItem *> colliding_item3 = collidingItems();
+        for (int i = 0; i < colliding_item3.length(); i++) {
+            if (typeid(*(colliding_item3[i])) == typeid(Ground)) {
+                verifOnGround = true;
+            }
+        }
+        if(!this->getIsJump() && !verifOnGround){
+            this->setOnGround(false);
+            connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpDown()));
         }
     }
     if (event->key() == Qt::Key_Up) {
-        this->setCurrentHeight(this->pos().y());
+        if( inscreen(0,-10,background)) {
+            this->setCurrentHeight(this->pos().y());
+            if (!this->isjump && this->onGround) {
+                timerPLayer->start(50);
+                this->onGround = false;
+                this->isjump = true;
+                connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpUp()));
 
-        if(!this->isjump && this->onGround){
-            timerPLayer->start(50);
-            this->onGround = false;
-            this->isjump = true;
-            cout<<"monte\n";
-            cout<<"j = "<<this->isjump<<" og ="<<this->onGround<<endl;
-            connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpUp()));
-
+            }
         }
     }
     if (event->key() == Qt::Key_Down) {
         if(inscreen(0,10,background)) {
-            this->move(0, 10);
-            this->draw();
+//            disconnect(timerPLayer,SIGNAL(timeout()), this, SLOT(jumpUp()));
+            disconnect(timerPLayer,SIGNAL(timeout()), this, SLOT(jumpUp()));
+            bool verif = false;
+
+            QList<QGraphicsItem *> colliding_item = collidingItems();
+            for (int i = 0; i < colliding_item.length(); i++) {
+                if (typeid(*(colliding_item[i])) == typeid(Wall)) {
+                    verif = true;
+//                    cout<<"on wall";
+                }
+            }
+            this->onGround = verif;
+            this->isjump = false;
+            connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpDown()));
         }
     }
 
+}
+void Player::restart(){
+    this->setPos(1 ,910);
+    this->setX(1);
+    this->setY(910);
 }

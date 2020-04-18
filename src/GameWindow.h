@@ -5,7 +5,7 @@
 #ifndef PROJETQT_GAMEWINDOW_H
 #define PROJETQT_GAMEWINDOW_H
 
-
+#include "Level1.h"
 #include "GameScene.h"
 
 #include <QMainWindow>
@@ -22,7 +22,8 @@ class GameWindow : public QMainWindow
 Q_OBJECT
 
 private :
-    GameScene* gameScene;
+//    GameScene* gameScene;
+    Level1* lvl1;
     QGraphicsView* mainView;
     QVBoxLayout* vertical;
     QDesktopWidget dw;

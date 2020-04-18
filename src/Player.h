@@ -11,7 +11,11 @@
 #include <QGraphicsScene>
 #include <QTimer>
 #include <QKeyEvent>
-#include "Sol.h"
+
+#include "Wall.h"
+#include "Ground.h"
+#include "Flammes.h"
+#include "FinalFlag.h"
 
 using namespace std;
 
@@ -42,11 +46,12 @@ public:
         this->onGround = true;
         this->isjump = false;
 
-        this->jumpHeight = 200;//un saut de 300 pxl
+        this->jumpHeight = 275;//un saut de 300 pxl
         this->currentHeight = this->x - 144 ;//car la hauteur du perso
     }
     //FONCTION PLAYER
     bool inscreen(int x, int y, QPixmap background);
+    void restart();
     void move(int x, int y);
     void draw();
     const QString &getDescription() const { return this->description; }
