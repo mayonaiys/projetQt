@@ -48,11 +48,12 @@ void Player::jumpDown(){
                 disconnect(timerPLayer,SIGNAL(timeout()), this, SLOT(jumpDown ()));
             }
             if(typeid(*(colliding_item[i])) == typeid(Flammes)){
-                cout<<"tu est mort\n";
+                emit Itsloose();
                 this->restart();
             }
             if(typeid(*(colliding_item[i])) == typeid(FinalFlag)){
-                cout<<"tu as reussi\n";
+                emit Itswin();
+                this->restart();
             }
         }
     }
@@ -92,6 +93,7 @@ void Player :: keyPressEvent(QPixmap background, QKeyEvent* event) {
         }
         if(!this->getIsJump() && !verifOnGround){
             this->setOnGround(false);
+            disconnect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpDown()));
             connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpDown()));
         }
     }
@@ -125,6 +127,7 @@ void Player :: keyPressEvent(QPixmap background, QKeyEvent* event) {
         }
         if(!this->getIsJump() && !verifOnGround){
             this->setOnGround(false);
+            disconnect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpDown()));
             connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpDown()));
         }
     }

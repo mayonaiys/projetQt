@@ -11,11 +11,15 @@
 #include <QGraphicsScene>
 #include <QTimer>
 #include <QKeyEvent>
+#include <typeinfo>
 
 #include "Wall.h"
 #include "Ground.h"
 #include "Flammes.h"
 #include "FinalFlag.h"
+
+#include "VictoryWindow.h"
+#include "GameOverWindow.h"
 
 using namespace std;
 
@@ -25,7 +29,6 @@ class Player :  public QObject, public QGraphicsPixmapItem{
 private:
     QString description;
     QTimer* timerPLayer;
-    //nbr de vie ?
     int x;
     int y;
     int currentHeight;
@@ -48,6 +51,7 @@ public:
 
         this->jumpHeight = 275;//un saut de 300 pxl
         this->currentHeight = this->x - 144 ;//car la hauteur du perso
+
     }
     //FONCTION PLAYER
     bool inscreen(int x, int y, QPixmap background);
@@ -71,13 +75,15 @@ public:
     void setCurrentHeight(int y){ this->currentHeight = y;};
     int getCurrentHeight(){return this->currentHeight;};
 
-
     // SLOTS
 public slots :
     void keyPressEvent(QPixmap background, QKeyEvent* event);
     void jumpUp();
     void jumpDown();
 
+signals:
+    void Itswin();
+    void Itsloose();
 
 };
 

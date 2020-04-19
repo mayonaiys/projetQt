@@ -25,10 +25,13 @@ Q_OBJECT
 private :
     QPixmap background;
     Player* player;
+    QTimer* time;
 
 public:
     Level1();
     void drawBackground(QPainter* painter, const QRectF& rect);
+
+    Player* getPlayer(){return this->player ;};
 
 public slots :
     void keyPressEvent(QKeyEvent* event);

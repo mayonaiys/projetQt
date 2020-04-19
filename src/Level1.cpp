@@ -5,10 +5,10 @@
 #include "Level1.h"
 
 Level1::Level1() {
-    this->background.load("../img/FondEspace.png");
+    this->background.load("../img/level1/FondEspace.png");
     this->setSceneRect(0, 0, background.width(), background.height());
 
-    this->player = new Player("player", "../img/player.png", 1 , background.height() -144 -26);
+    this->player = new Player("player", "../img/level1/player.png", 1 , background.height() -144 -26);
     this->addItem(player);//144 sur 100 player.png
 
     Ground* floor1 = new Ground("1floor", "../img/level1/1floor.png", 0, 0);
@@ -39,3 +39,4 @@ void Level1::drawBackground(QPainter *painter, const QRectF &rect) {
 void Level1::keyPressEvent(QKeyEvent* event){
     this->player->keyPressEvent(background, event);
 }
+

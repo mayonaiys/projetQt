@@ -13,13 +13,28 @@ GameWindow::GameWindow(QWidget *parent)
 //    mainView->setScene(gameScene);
     mainView->setScene(lvl1);
 //    mainView->scale(1,1);
-    mainView->scale(0.5, 0.5);
+    mainView->scale(0.9,0.9);
 
     this->setCentralWidget(mainView);
 
-    this->setWindowTitle("Main view");
-//    this->resize(dx, dy);
+    this->setWindowTitle("GameWindow");
+    this->setFixedSize(dx, dy);
 
+    connect(this->lvl1->getPlayer(), SIGNAL(Itswin()),this, SLOT(Itswin()));
+    connect(this->lvl1->getPlayer(), SIGNAL(Itsloose()),this, SLOT(Itsloose()));
+
+}
+
+void GameWindow::Itswin() {
+    VictoryWindow* victoryWindow = new VictoryWindow();
+    victoryWindow->show();
+    this->close();
+}
+
+void GameWindow::Itsloose() {
+    GameOverWindow* gameover = new GameOverWindow();
+    gameover->show();
+    this->close();
 }
 
 

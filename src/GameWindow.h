@@ -6,7 +6,7 @@
 #define PROJETQT_GAMEWINDOW_H
 
 #include "Level1.h"
-#include "GameScene.h"
+//#include "GameScene.h"
 
 #include <QMainWindow>
 #include <QGraphicsView>
@@ -31,6 +31,10 @@ private :
 public:
     GameWindow(QWidget* parent = nullptr);
     virtual ~GameWindow() {};
+
+public slots:
+    void Itswin();
+    void Itsloose();
 
 };
 

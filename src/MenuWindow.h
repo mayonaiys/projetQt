@@ -4,9 +4,29 @@
 
 #ifndef PROJETQT_MENUWINDOW_H
 #define PROJETQT_MENUWINDOW_H
+
 #include <QMainWindow>
+#include <QWidget>
+#include <QPushButton>
+#include <iostream>
+
+#include "GameWindow.h"
+#include "MenuLevel.h"
+#include "TutoWindow.h"
+
+using namespace std;
+
 
 class MenuWindow : public QMainWindow {
+ Q_OBJECT
+
+public:
+    MenuWindow(QWidget *parent = nullptr);
+
+public slots:
+    void pressbPLay();
+    void pressbTimer();
+    void pressbTuto();
 
 };
 
