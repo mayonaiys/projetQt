@@ -12,11 +12,13 @@
 #include <QTimer>
 #include <QKeyEvent>
 #include <typeinfo>
+#include <fstream>
 
 #include "Wall.h"
 #include "Ground.h"
 #include "Flammes.h"
 #include "FinalFlag.h"
+#include "Piece.h"
 
 #include "VictoryWindow.h"
 #include "GameOverWindow.h"
@@ -31,6 +33,7 @@ private:
     QTimer* timerPLayer;
     int x;
     int y;
+    int score;
     int currentHeight;
     int jumpHeight;
     bool isjump;
@@ -51,6 +54,8 @@ public:
 
         this->jumpHeight = 275;//un saut de 300 pxl
         this->currentHeight = this->x - 144 ;//car la hauteur du perso
+
+        this->score = 0 ;
 
     }
     //FONCTION PLAYER
@@ -75,6 +80,8 @@ public:
     void setCurrentHeight(int y){ this->currentHeight = y;};
     int getCurrentHeight(){return this->currentHeight;};
 
+    int getScore(){return this->score;};
+
     // SLOTS
 public slots :
     void keyPressEvent(QPixmap background, QKeyEvent* event);
@@ -82,7 +89,7 @@ public slots :
     void jumpDown();
 
 signals:
-    void Itswin();
+    void Itswin(    );
     void Itsloose();
 
 };

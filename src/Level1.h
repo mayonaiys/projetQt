@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <QGraphicsScene>
+#include <QGraphicsView>
 #include <QPixmap>
 #include <QTimer>
 #include <QPainter>
@@ -18,6 +19,7 @@
 #include "Ground.h"
 #include "Flammes.h"
 #include "FinalFlag.h"
+#include "Piece.h"
 
 class Level1 : public QGraphicsScene {
 Q_OBJECT
@@ -25,10 +27,10 @@ Q_OBJECT
 private :
     QPixmap background;
     Player* player;
-    QTimer* time;
 
 public:
     Level1();
+    void writescore(float time, int score);
     void drawBackground(QPainter* painter, const QRectF& rect);
 
     Player* getPlayer(){return this->player ;};

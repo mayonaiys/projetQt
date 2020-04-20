@@ -12,9 +12,9 @@
 #include <QGraphicsView>
 #include <QDesktopWidget>
 #include <QVector>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
 #include <QPushButton>
+#include <QLabel>
+#include <QString>
 
 
 class GameWindow : public QMainWindow
@@ -25,9 +25,10 @@ private :
 //    GameScene* gameScene;
     Level1* lvl1;
     QGraphicsView* mainView;
-    QVBoxLayout* vertical;
     QDesktopWidget dw;
-
+    float time;
+    QLabel* timeprint;
+    QLabel* scoreprint;
 public:
     GameWindow(QWidget* parent = nullptr);
     virtual ~GameWindow() {};
@@ -35,6 +36,7 @@ public:
 public slots:
     void Itswin();
     void Itsloose();
+    void updatetime();
 
 };
 

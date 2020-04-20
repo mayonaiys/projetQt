@@ -3,6 +3,7 @@
 //
 
 #include "Player.h"
+using namespace std;
 
 void Player::move(int x, int y) {
     this->x += x;
@@ -12,7 +13,6 @@ void Player::move(int x, int y) {
 void Player::draw() {
     this->setPos(this->getX(), this->getY());
 }
-
 void Player::jumpUp(){// attention test pour le disconnect
     if(this->getIsJump() && !this->getOnGround()){
 //        cout << "jump up\n";
@@ -23,8 +23,26 @@ void Player::jumpUp(){// attention test pour le disconnect
             disconnect(timerPLayer,SIGNAL(timeout()), this, SLOT(jumpUp()));
             connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpDown()));
         } else {
-            this->move(0, -5);
+            this->move(0, -10);
             this->draw();
+
+            QList<QGraphicsItem *> colliding_item = collidingItems();
+            for (int i = 0; i < colliding_item.length(); i++) {
+                if (typeid(*(colliding_item[i])) == typeid(Ground)) {
+                    this->move(0, 5);
+                    this->draw();
+
+                    this->isjump = false;
+                    this->onGround = false;
+
+                    disconnect(timerPLayer,SIGNAL(timeout()), this, SLOT(jumpUp()));
+                    connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpDown()));
+                }
+                if (typeid(*(colliding_item[i])) == typeid(Piece)) {
+                    delete colliding_item[i];
+                    this->score += 1000;
+                }
+            }
         }
     }
 }
@@ -40,8 +58,8 @@ void Player::jumpDown(){
         QList<QGraphicsItem *> colliding_item = collidingItems();
         for (int i = 0; i < colliding_item.length(); i++) {
             if (typeid(*(colliding_item[i])) == typeid(Ground)) {
-               this->isjump = false;
-               this->onGround = true;
+               this->setIsJump(false);
+               this->setOnGround(true);
 //                cout << "au sol \n";
 //                cout << "j = " << this->isjump << " og =" << this->onGround << endl;
                 this->currentHeight = this->getY();
@@ -54,6 +72,10 @@ void Player::jumpDown(){
             if(typeid(*(colliding_item[i])) == typeid(FinalFlag)){
                 emit Itswin();
                 this->restart();
+            }
+            if (typeid(*(colliding_item[i])) == typeid(Piece)) {
+                delete colliding_item[i];
+                this->score += 1000;
             }
         }
     }
@@ -90,6 +112,7 @@ void Player :: keyPressEvent(QPixmap background, QKeyEvent* event) {
             if (typeid(*(colliding_item2[i])) == typeid(Ground)) {
                 verifOnGround = true;
             }
+
         }
         if(!this->getIsJump() && !verifOnGround){
             this->setOnGround(false);
@@ -117,12 +140,21 @@ void Player :: keyPressEvent(QPixmap background, QKeyEvent* event) {
                     this->move(-10, 0);
                     this->draw();
                 }
+                if (typeid(*(colliding_item2[i])) == typeid(Piece)) {
+                    delete colliding_item2[i];
+                    this->score += 1000;
+                }
             }
         }
+
         QList<QGraphicsItem *> colliding_item3 = collidingItems();
         for (int i = 0; i < colliding_item3.length(); i++) {
             if (typeid(*(colliding_item3[i])) == typeid(Ground)) {
                 verifOnGround = true;
+            }
+            if (typeid(*(colliding_item3[i])) == typeid(Piece)) {
+                delete colliding_item3[i];
+                this->score += 1000;
             }
         }
         if(!this->getIsJump() && !verifOnGround){
@@ -132,15 +164,13 @@ void Player :: keyPressEvent(QPixmap background, QKeyEvent* event) {
         }
     }
     if (event->key() == Qt::Key_Up) {
-        if( inscreen(0,-10,background)) {
-            this->setCurrentHeight(this->pos().y());
-            if (!this->isjump && this->onGround) {
-                timerPLayer->start(50);
-                this->onGround = false;
-                this->isjump = true;
-                connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpUp()));
+        this->setCurrentHeight(this->pos().y());
+        if (!this->isjump && this->onGround) {
+            timerPLayer->start(50);
+            this->onGround = false;
+            this->isjump = true;
+            connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpUp()));
 
-            }
         }
     }
     if (event->key() == Qt::Key_Down) {
