@@ -19,6 +19,7 @@ TimerWindow::TimerWindow(QWidget *parent)
     centralWidget()->setStyleSheet("QWidget #window { background-image : url(../img/menu/TimerWindow.png);}");
 
     QLabel* labelTitle = new QLabel(window);
+    //A
 
     QString filePath = "../resultat/timer-score1.txt";
     QFile file(filePath);
