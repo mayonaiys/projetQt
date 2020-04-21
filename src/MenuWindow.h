@@ -12,7 +12,8 @@
 
 #include "GameWindow.h"
 #include "MenuLevel.h"
-#include "TutoWindow.h"
+#include "tuto1.h"
+#include "TimerWindow.h"
 
 using namespace std;
 

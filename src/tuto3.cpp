@@ -1,11 +1,14 @@
 //
-// Created by Théo on 19/04/2020.
+// Created by Théo on 21/04/2020.
 //
 
-#include "TutoWindow.h"
+#include "tuto3.h"
+#include "tuto2.h"
 #include "MenuWindow.h"
 
-TutoWindow :: TutoWindow(QWidget *parent ){
+tuto3 :: tuto3(QWidget *parent )
+        :QMainWindow(parent)
+{
     this->setWindowTitle("Theo LOPEZ");
     this->setFixedSize(1920,1080);
 
@@ -16,7 +19,7 @@ TutoWindow :: TutoWindow(QWidget *parent ){
     this->setCursor(Qt::CrossCursor);
 
     centralWidget()->setObjectName("window");
-    centralWidget()->setStyleSheet("QWidget #window { background-image : url(../img/menu/Tuto.png);}");
+    centralWidget()->setStyleSheet("QWidget #window { background-image : url(../img/menu/Tuto33.png);}");
 
     QPushButton* bMainMenu = new QPushButton(window);
     bMainMenu->setCursor(Qt::PointingHandCursor);
@@ -25,11 +28,24 @@ TutoWindow :: TutoWindow(QWidget *parent ){
     bMainMenu->setIcon(QIcon("../img/Bouton/MainPage.png"));
     bMainMenu->setIconSize(QSize(162,142));
 
+    QPushButton* nPrec = new QPushButton(window);
+    nPrec->setCursor(Qt::PointingHandCursor);
+    nPrec->setFixedSize(162,142);
+    nPrec->move(52,885);
+    nPrec->setIcon(QIcon("../img/Bouton/PrecLevel.png"));
+    nPrec->setIconSize(QSize(162,142));
+
     connect(bMainMenu, SIGNAL(clicked()), this, SLOT(pressMainMenu()));
+    connect(nPrec, SIGNAL(clicked()), this, SLOT(pressPrec()));
 }
 
-void TutoWindow::pressMainMenu() {
+void tuto3::pressMainMenu() {
     MenuWindow* menu = new MenuWindow();
     menu->show();
+    this->close();
+}
+void tuto3::pressPrec() {
+    tuto2* tuto = new tuto2();
+    tuto->show();
     this->close();
 }

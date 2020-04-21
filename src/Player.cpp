@@ -163,14 +163,17 @@ void Player :: keyPressEvent(QPixmap background, QKeyEvent* event) {
             connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpDown()));
         }
     }
-    if (event->key() == Qt::Key_Up) {
-        this->setCurrentHeight(this->pos().y());
-        if (!this->isjump && this->onGround) {
-            timerPLayer->start(50);
-            this->onGround = false;
-            this->isjump = true;
-            connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpUp()));
+    if(!this->isjump) {
+        if (event->key() == Qt::Key_Up) {
+            //ne pas sauter a l'infini
+            this->setCurrentHeight(this->pos().y());
+            if (!this->isjump && this->onGround) {
+                timerPLayer->start(50);
+                this->onGround = false;
+                this->isjump = true;
+                connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpUp()));
 
+            }
         }
     }
     if (event->key() == Qt::Key_Down) {

@@ -3,6 +3,8 @@
 //
 
 #include "Level1.h"
+#include <QFile>
+#include <QTextStream>
 using namespace std;
 
 Level1::Level1() {
@@ -38,24 +40,28 @@ Level1::Level1() {
 
 }
 void Level1::writescore(float time, int score){
-    ofstream wfile("../resultat/timer-score1.txt");
-    ifstream rfile("../resultat/timer-score1.txt");
-    if(!rfile){
-        cout << "Error : Can't open the file" << endl;
-    } else {
-        string mot;
-        getline(rfile, mot);
-        cout <<mot<<endl;
-        if(mot.length() != 0 ){
-            if(stoi(mot) < time){
-                wfile <<time <<" - "<<score<<endl;
-            }
-        } else {
-            wfile <<time <<" - "<<score<<endl;
+    QString filePath = "../resultat/timer-score1.txt";
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
+        return;
+    QString buff = file.readAll();//contenu du fichier
+    QTextStream flux(&file);
+    flux.setCodec("UTF-8");
+
+    if(buff.length() > 0){
+//        cout<<"le fichier n'est pas vide\n";
+//        QString nombre = buff;
+        QString nombre = buff.split(" sec - ")[0];
+        if(nombre.toFloat() > time){
+            file.resize(0);
+            flux <<time<<" sec - "<<score<<" pts";
         }
-        wfile.close();
-        rfile.close();
+    }else{
+//        cout<<"le fichier est vide et j'ecris dedans \n";
+        flux <<time<<" sec - "<<score<<" pts";
     }
+
+    file.close();
 }
 void Level1::drawBackground(QPainter *painter, const QRectF &rect) {
     Q_UNUSED(rect);

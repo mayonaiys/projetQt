@@ -3,7 +3,6 @@
 //
 
 #include "MenuWindow.h"
-
 MenuWindow::MenuWindow(QWidget *parent)
 : QMainWindow(parent)
 {
@@ -55,11 +54,13 @@ void MenuWindow::pressbPLay() {
 }
 
 void MenuWindow::pressbTimer() {
-
+    TimerWindow* timer = new TimerWindow();
+    timer->show();
+    this->close();
 }
 
 void MenuWindow::pressbTuto() {
-    TutoWindow* tuto = new TutoWindow();
+    tuto1* tuto = new tuto1();
     tuto->show();
     this->close();
 }
