@@ -4,7 +4,9 @@
 * Le meilleur temps écoulé pour parvenir à la ligne d'arrivée est mémorisé. Le jeu doit se composer d'une scène (le plateau de jeu complet) et au moins d'une vue centrée sur le joueur. Cela reprend le principe scène/vue du code qui sera fourni avec le descriptif du projet 
 * Le choix du design de la scène (la partie esthétique) est libre 
 * La version de base doit pouvoir permettre de recommencer une partie lorsque le joueur est arrivé à la fin ou de quitter le jeu
+
 -----------------
+
 <h1>Consignes</h1> 
 * Projet en monôme. Chaque code est personnel 
 * Une soutenance (présentation) du projet est prévue le Jeudi 07/05/2020 
@@ -18,4 +20,5 @@
 * L’organisation du code 
 * Il est préférable (pas obligatoire) d’utiliser Qt Creator et de générer un fichier exécutable du Jeu 
 * En cas d’utilisation d’un bout de code récupéré d’Internet ou d’un collègue de classe, il faut citer la source sinon c’est du plagiat (interdit et donc sanctionné)
+
 -----------------
