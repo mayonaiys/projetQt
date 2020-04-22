@@ -19,6 +19,9 @@
 #include "Flammes.h"
 #include "FinalFlag.h"
 #include "Piece.h"
+#include "MovingGround.h"
+#include "JetPack.h"
+
 
 #include "VictoryWindow.h"
 #include "GameOverWindow.h"

@@ -1,12 +1,11 @@
 //
-// Created by Théo on 11/04/2020.
+// Created by Théo on 21/04/2020.
 //
 
-#ifndef PROJETQT_GAMEWINDOW_H
-#define PROJETQT_GAMEWINDOW_H
+#ifndef PROJETQT_GAMEWINDOW2_H
+#define PROJETQT_GAMEWINDOW2_H
 
-#include "Level1.h"
-//#include "GameScene.h"
+#include "Level2.h"
 
 #include <QMainWindow>
 #include <QGraphicsView>
@@ -17,21 +16,20 @@
 #include <QString>
 
 
-class GameWindow : public QMainWindow
+class GameWindow2 : public QMainWindow
 {
 Q_OBJECT
 
 private :
 //    GameScene* gameScene;
-    Level1* lvl1;
+    Level2* lvl2;
     QGraphicsView* mainView;
     QDesktopWidget dw;
     float time;
     QLabel* timeprint;
     QLabel* scoreprint;
 public:
-    GameWindow(QWidget* parent = nullptr);
-    virtual ~GameWindow() {};
+    GameWindow2(QWidget* parent = nullptr);
 
 public slots:
     void Itswin();
@@ -40,5 +38,4 @@ public slots:
 
 };
 
-
-#endif //PROJETQT_GAMEWINDOW_H
+#endif //PROJETQT_GAMEWINDOW2_H

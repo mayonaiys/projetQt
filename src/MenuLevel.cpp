@@ -49,9 +49,10 @@ MenuLevel::MenuLevel(QWidget *parent)
     bLvl3->setIcon(QIcon("../img/Bouton/Level3Bouton.png"));
     bLvl3->setIconSize(QSize(775,147));
 
-
     connect(bMainMenu, SIGNAL(clicked()), this, SLOT(pressMainPage()));
     connect(bLvl1, SIGNAL(clicked()), this, SLOT(presslvl1()));
+    connect(bLvl2, SIGNAL(clicked()), this, SLOT(presslvl2()));
+    connect(bLvl3, SIGNAL(clicked()), this, SLOT(presslvl3()));
 }
 
 void MenuLevel::pressMainPage() {
@@ -61,8 +62,18 @@ void MenuLevel::pressMainPage() {
 }
 
 void MenuLevel::presslvl1() {
-    GameWindow* gameWindow = new GameWindow();
+    GameWindow1* gameWindow = new GameWindow1();
     gameWindow->show();
     this->close();
 
+}
+void MenuLevel::presslvl2(){
+    GameWindow2* gameWindow = new GameWindow2();
+    gameWindow->show();
+    this->close();
+}
+void MenuLevel::presslvl3() {
+    GameWindow3* gameWindow3 = new GameWindow3();
+    gameWindow3->show();
+    this->close();
 }

@@ -46,7 +46,7 @@ MenuWindow::MenuWindow(QWidget *parent)
 }
 
 void MenuWindow::pressbPLay() {
-//    GameWindow* game = new GameWindow();
+//    GameWindow1* game = new GameWindow1();
 //    game->show();
     MenuLevel* menuLevel = new MenuLevel();
     menuLevel->show();

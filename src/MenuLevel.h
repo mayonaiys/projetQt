@@ -17,6 +17,8 @@ public:
 public slots:
     void pressMainPage();
     void presslvl1();
+    void presslvl2();
+    void presslvl3();
 
 };
 

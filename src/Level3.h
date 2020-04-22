@@ -1,12 +1,13 @@
 //
-// Created by Théo on 11/04/2020.
+// Created by Théo on 22/04/2020.
 //
 
-#ifndef PROJETQT_GAMESCENE_H
-#define PROJETQT_GAMESCENE_H
+#ifndef PROJETQT_LEVEL3_H
+#define PROJETQT_LEVEL3_H
 
 #include <iostream>
 #include <QGraphicsScene>
+#include <QGraphicsView>
 #include <QPixmap>
 #include <QTimer>
 #include <QPainter>
@@ -15,10 +16,12 @@
 
 #include "Player.h"
 #include "Wall.h"
+#include "Ground.h"
+#include "Flammes.h"
+#include "FinalFlag.h"
+#include "Piece.h"
 
-using namespace std;
-class GameScene : public QGraphicsScene {
-
+class Level3 : public QGraphicsScene {
 Q_OBJECT
 
 private :
@@ -26,12 +29,17 @@ private :
     Player* player;
 
 public:
-    GameScene();
+    Level3();
+    void writescore(float time, int score);
     void drawBackground(QPainter* painter, const QRectF& rect);
+
+    Player* getPlayer(){return this->player ;};
 
 public slots :
     void keyPressEvent(QKeyEvent* event);
 };
 
 
-#endif //PROJETQT_GAMESCENE_H
+
+
+#endif //PROJETQT_LEVEL3_H

@@ -10,7 +10,11 @@
 #include <QPushButton>
 #include <iostream>
 
-#include "GameWindow.h"
+#include "GameWindow1.h"
+#include "GameWindow2.h"
+#include "GameWindow3.h"
+
+
 #include "MenuLevel.h"
 #include "tuto1.h"
 #include "TimerWindow.h"

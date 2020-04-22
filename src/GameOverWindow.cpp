@@ -3,7 +3,7 @@
 //
 
 #include "GameOverWindow.h"
-#include "GameWindow.h"
+#include "GameWindow1.h"
 #include "MenuWindow.h"
 
 GameOverWindow::GameOverWindow(QWidget *parent)
@@ -49,8 +49,8 @@ GameOverWindow::GameOverWindow(QWidget *parent)
 }
 
 void GameOverWindow::restart() {
-    GameWindow* game = new GameWindow();
-    game->show();
+    MenuLevel* menu = new MenuLevel();
+    menu->show();
     this->close();
 }
 
