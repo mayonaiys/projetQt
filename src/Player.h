@@ -92,8 +92,9 @@ public slots :
     void jumpDown();
 
 signals:
-    void Itswin(    );
+    void Itswin();
     void Itsloose();
+    void wJetPack();
 
 };
 

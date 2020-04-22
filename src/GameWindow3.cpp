@@ -16,7 +16,7 @@ GameWindow3::GameWindow3(QWidget *parent)
     mainView->setScene(lvl3);
     mainView->scale(0.9,0.9);
     this->setCentralWidget(mainView);
-    this->setWindowTitle("GameWindow2");
+    this->setWindowTitle("GameWindow3");
     this->setFixedSize(dx, dy);
 
     connect(this->lvl3->getPlayer(), SIGNAL(Itswin()),this, SLOT(Itswin()));

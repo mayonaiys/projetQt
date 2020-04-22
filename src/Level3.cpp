@@ -30,6 +30,7 @@ Level3::Level3(){
     this->addItem(c2);
     this->addItem(c3);
 
+
 }
 void Level3::writescore(float time, int score){
     QString filePath = "../resultat/timer-score3.txt";
@@ -60,7 +61,7 @@ void Level3::drawBackground(QPainter *painter, const QRectF &rect) {
     painter->drawPixmap(QRectF(0,0,background.width(), background.height()), background, sceneRect());
 }
 
-void Level3::keyPressEvent(QKeyEvent* event){
+void Level3::keyPressEvent(QKeyEvent* event) {
     this->player->keyPressEvent(background, event);
 
 }

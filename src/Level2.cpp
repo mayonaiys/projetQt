@@ -11,7 +11,7 @@ Level2::Level2(){
     this->background.load("../img/level2/FondEspace.png");
     this->setSceneRect(0, 0, background.width(), background.height());
 
-    this->player = new Player("player", "../img/level2/player.png", 2 , background.height() -144 -25 );
+    this->player = new Player("player", "../img/level2/player.png", 2 , background.height() -144 - 25 );
     this->addItem(player);//144 sur 100 player.png
 
 //    Ground* floor1 = new Ground("floor", "../img/level2/testfloor.png",0,0);

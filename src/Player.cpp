@@ -45,7 +45,6 @@ void Player::jumpUp(){// attention test pour le disconnect
                 if (typeid(*(colliding_item[i])) == typeid(JetPack)) {
                     delete colliding_item[i];
                     this->jumpHeight += 200;
-
                 }
             }
         }
@@ -95,7 +94,6 @@ void Player::jumpDown(){
                     this->setOnGround(false);
                     this->setIsJump(true);
                     connect(timerPLayer, SIGNAL(timeout()), this, SLOT(jumpUp()));
-
                 }
             }
         }
@@ -137,6 +135,10 @@ void Player :: keyPressEvent(QPixmap background, QKeyEvent* event) {
                 }
                 if(typeid(*(colliding_item2[i])) == typeid(FinalFlag)){
                     emit Itswin();
+                    this->restart();
+                }
+                if(typeid(*(colliding_item2[i])) == typeid(Flammes)){
+                    emit Itsloose();
                     this->restart();
                 }
             }
@@ -186,6 +188,10 @@ void Player :: keyPressEvent(QPixmap background, QKeyEvent* event) {
                     emit Itswin();
                     this->restart();
                 }
+                if(typeid(*(colliding_item2[i])) == typeid(Flammes)){
+                    emit Itsloose();
+                    this->restart();
+                }
             }
         }
 
@@ -201,10 +207,13 @@ void Player :: keyPressEvent(QPixmap background, QKeyEvent* event) {
             if (typeid(*(colliding_item3[i])) == typeid(JetPack)) {
                 delete colliding_item3[i];
                 this->jumpHeight += 200;
-
             }
             if(typeid(*(colliding_item3[i])) == typeid(FinalFlag)){
                 emit Itswin();
+                this->restart();
+            }
+            if(typeid(*(colliding_item3[i])) == typeid(Flammes)){
+                emit Itsloose();
                 this->restart();
             }
         }

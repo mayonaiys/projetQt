@@ -17,6 +17,7 @@ GameWindow1::GameWindow1(QWidget *parent)
 //    playerView->setScene(lvl1);
 //    playerView->resize(300, 300);
 //    playerView->setWindowTitle(lvl1->getPlayer()->getDescription());
+//    playerView->centerOn(lvl1->getPlayer());
 //    playerView->show();
 
 
