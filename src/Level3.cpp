@@ -8,6 +8,7 @@
 using namespace std;
 
 Level3::Level3(){
+    //on ajoute nos classes / background
     this->background.load("../img/level3/fond.png");
     this->setSceneRect(0, 0, background.width(), background.height());
 
@@ -32,6 +33,7 @@ Level3::Level3(){
 
 
 }
+//on ecrit le score et le temps dans un fichier pour l'afficher
 void Level3::writescore(float time, int score){
     QString filePath = "../resultat/timer-score3.txt";
     QFile file(filePath);
@@ -56,11 +58,12 @@ void Level3::writescore(float time, int score){
 
     file.close();
 }
+//surchage de la fonction
 void Level3::drawBackground(QPainter *painter, const QRectF &rect) {
     Q_UNUSED(rect);
     painter->drawPixmap(QRectF(0,0,background.width(), background.height()), background, sceneRect());
 }
-
+//le slot va appeler une fonction de player comme ca pour chq niveau le player va reagir de la meme manieer
 void Level3::keyPressEvent(QKeyEvent* event) {
     this->player->keyPressEvent(background, event);
 

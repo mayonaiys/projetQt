@@ -16,7 +16,6 @@ public:
     Ground(QString description, QString imageFileName, int x, int y) : QGraphicsPixmapItem(QPixmap(imageFileName)), description(description){
         this->setPos(x,y);
     }
-
 };
 
 

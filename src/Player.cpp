@@ -45,6 +45,8 @@ void Player::jumpUp(){// attention test pour le disconnect
                 if (typeid(*(colliding_item[i])) == typeid(JetPack)) {
                     delete colliding_item[i];
                     this->jumpHeight += 200;
+                    this->setPixmap(QPixmap("../img/level3/playerWJetPack.png"));
+//                    this->setPixmap(QPixmap("../img/level3/playerWJetPack.png"));
                 }
             }
         }
@@ -84,6 +86,7 @@ void Player::jumpDown(){
             if (typeid(*(colliding_item[i])) == typeid(JetPack)) {
                 delete colliding_item[i];
                 this->jumpHeight += 200;
+//                this->setPixmap(QPixmap("../img/level3/playerWJetPack.png"));
 
             }
             if(typeid(*colliding_item[i]) == typeid(MovingGround)){
@@ -131,6 +134,7 @@ void Player :: keyPressEvent(QPixmap background, QKeyEvent* event) {
                 if (typeid(*(colliding_item2[i])) == typeid(JetPack)) {
                     delete colliding_item2[i];
                     this->jumpHeight += 200;
+//                    this->setPixmap(QPixmap("../img/level3/playerWJetPack.png"));
 
                 }
                 if(typeid(*(colliding_item2[i])) == typeid(FinalFlag)){
@@ -182,7 +186,7 @@ void Player :: keyPressEvent(QPixmap background, QKeyEvent* event) {
                 if (typeid(*(colliding_item2[i])) == typeid(JetPack)) {
                     delete colliding_item2[i];
                     this->jumpHeight += 200;
-
+//                    this->setPixmap(QPixmap("../img/level3/playerWJetPack.png"));
                 }
                 if(typeid(*(colliding_item2[i])) == typeid(FinalFlag)){
                     emit Itswin();
@@ -207,6 +211,7 @@ void Player :: keyPressEvent(QPixmap background, QKeyEvent* event) {
             if (typeid(*(colliding_item3[i])) == typeid(JetPack)) {
                 delete colliding_item3[i];
                 this->jumpHeight += 200;
+//                this->setPixmap(QPixmap("../img/level3/playerWsPack.png"));
             }
             if(typeid(*(colliding_item3[i])) == typeid(FinalFlag)){
                 emit Itswin();
